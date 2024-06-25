@@ -9,8 +9,5 @@ public class ContenuDto {
 
 	public void setMot(String mot) {
 		this.mot = mot;
-	}
-    
-
-   
+	}  
 }

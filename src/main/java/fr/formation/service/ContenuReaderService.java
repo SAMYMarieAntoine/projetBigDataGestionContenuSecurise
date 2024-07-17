@@ -38,20 +38,13 @@ public class ContenuReaderService {
 
     public List<ContenuDto> read(String filename) {
         List<ContenuDto> winds = new ArrayList<>();
-
         log.debug("Ouverture du fichier {} ...", filename);
 
         try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
             String line;
-            //int index = 0;
 
             while ((line = br.readLine()) != null) {
-                // En-tête : 
-                /*
-                 if (index++ < 1) { // On est dans l'en-tête, donc on ignore
-                    continue; // Boucler directement
-                } 
-                    */
+
                 String[] infos = line.split(":");
                 ContenuDto dto = new ContenuDto();
 
@@ -59,7 +52,6 @@ public class ContenuReaderService {
       
                 winds.add(dto);
             }
-            //log.debug("{} solar winds processed!", index);
             log.debug("{} mots de passe traités!", winds.size());
         }
         catch (Exception ex) {
@@ -67,7 +59,4 @@ public class ContenuReaderService {
         }
         return winds;
     }
-
-    
-
 }

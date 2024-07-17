@@ -27,16 +27,10 @@ public class ContenuApiController {
    
     @PostMapping("/read-and-save")
     public void readAndSave() {
-    	//try (Connection connection = DriverManager.getConnection("jdbc:postgresql://127.0.0.1:5432/solarwind", "postgres", "root")) {
-        //try (Connection connection = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3310/solarwind", "root", "root")) {
-        
+     
         try (Connection connection = DriverManager.getConnection("jdbc:clickhouse://localhost:8123/contenu", "default", "")) {
             connection.setAutoCommit(false);
-            /* 
-            for (int i = 1; i <= 12; i++) {
-                this.readAndSave(connection, i);
-            }
-            */
+ 
             // la lecture de tous les fichiers dans le répertoire
             List<ContenuDto> allWinds = this.readerService.readAllFilesInDirectory("C:/Users/hedib/ProjetFinal_GestionSecu/pwnedpasswords");
             this.saveAll(connection, allWinds);
@@ -48,7 +42,6 @@ public class ContenuApiController {
         }
     }
       
-    //private void readAndSave(Connection connection, int mois) {
     //elle accepte une liste de ContenuDto
     private void saveAll(Connection connection, List<ContenuDto> allWinds) {
         //List<ContenuDto> winds = this.readerService.read("C:/Users/hedib/ProjetFinal_GestionSecu/pwnedpasswords/00000.txt");
